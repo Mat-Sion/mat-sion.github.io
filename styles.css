@@ -17,13 +17,25 @@
             min-height:100vh;
         }
 
-        h1, h2, h3, h4{
+        h1, h2, h4{
             color: #38bdf8;
             text-align: center;
         }
 
+        h3{
+            color: #bcc7cc;
+            text-align: start;
+        }
+
         p{
             margin-bottom: 40px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        li {
+            font-size: 18px;
+            line-height: 1.6;
         }
 
         .card { 

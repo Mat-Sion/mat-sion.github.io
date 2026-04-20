@@ -9,75 +9,148 @@
     </head>
 
     <body>
-
-    <header>
-    <h1>Ecuación Diferencial: Resorte Amortiguado</h1>
-    </header>
+        <header>
+                <h1>Buscando un Mejor Futuro</h1>
+            <p>Análisis del problema y propuesta de solución mediante ecuaciones diferenciales</p>
+        </header>
 
 
         <div class="card">
-            <h2>Modelo físico de vibraciones</h2>
-            <p>
-                Describe un sistema de suspensiones de resortes en base a la suspencion,
-                presion y resistencia, contando la velocidad en la que interactua y hacia
-                que direccion.
+            <h2>Objetivo</h2>
+            <p text-align="center">
+                Se analiza la pobreza como un fenómeno social y se propondra soluciones sostenibles basado en conflictos
+                como el desempleo formal y la falta de seguridad, utilizando un modelo para demostrar su impacto en el
+                tiempo.
             </p>
         </div>
 
-    <section>
-        <div class="card">
-            <h2>🧠 Procedimiento</h2>
-            <p style="text-align: start"><b>1. Ecuación característica:</b></p>
-            <p style="text-align: center">\(r^2 + ar + b = 0 \)</p>
+        <section>
+                <h2>Problemas principales</h2>
+            <div class="card">
+                <h3>Falta de empleo</h3>
+                    <ul>
+                        <li>Escasa inversión en empresas</li>
+                        <li>Condiciones laborales inestables</li>
+                        <li>Desigualdad en oportunidades</li>
+                    </ul>
+
+                <h3>Desigualdad social</h3>
+                    <ul>
+                        <li>Diferencias económicas marcadas</li>
+                        <li>Acceso limitado a educación</li>
+                        <li>Problemas familiares y sociales</li>
+                </ul>
+
+                <h3>Falta de seguridad</h3>
+                    <ul>
+                        <li>Crimen organizado</li>
+                        <li>Corrupción institucional</li>
+                        <li>Falta de confianza en autoridades</li>
+                    </ul>
+            </div>
+        </section>
+
+        <section>
+                <h2>Modelo Matemático</h2>
+            <div class="card center">
+                <p>
+                    Representando el modelo en base al nivel de la pobreza "<b>P(t)</b>" al numero de la poblacion, con
+                    un valor estandar de empleos "<b>E(t)</b>" y con una seguridad "<b>S(t)</b>" que garantice reducir
+                    factores negativos "<b>c</b>" que sean constantes en base al tiempo.
+                </p>
+
+                <p style="text-align: center"> \( \frac{dP}{dt} = -aE - bS + c \) </p>
+
+                <p>
+                    Cuando aumentan el Empleo y la Seguridad, El cambio de la pobreza se vuelve negativo.
+                    Esto significa que la pobreza <span class="highlight">disminuye con el tiempo</span>.
+                </p>
+            </div>
+
+        <section>
+            <div class="card">
+                <h2>🧠 Solucion</h2>
+                    <p style="text-align: start"><b>1. simplificacion:</b></p>
+                    <p style="text-align: center">\( \frac{dP}{dt} = (-aE - bS + c) > K \)</p>
             
-            <p style="text-align: start"><b>2. fórmula general:</b></p>
-            <p style="text-align: center">\(r = \frac{-a \pm \sqrt{a^2 - 4b}}{2} \)</p>
+                    <p style="text-align: start"><b>2. separacion:</b></p>
+                    <p style="text-align: center">\( dP = K dt \)</p>
 
-            <p style="text-align: start"><b>3. Caso subamortiguado:</b></p>
-            <p style="text-align: center">\( r = -\frac{a}{2} \pm i\omega \)</p>
+                    <p style="text-align: start"><b>3. integracion:</b></p>
+                    <p style="text-align: center">\( P = Kt + C \)</p>
 
-            <p style="text-align: start"><b>4. Solución general:</b></p>
-            <p style="text-align: center">\( y(t) = e^{\frac{a}{2}t} (C_1 cos(\omega t) + C_2 sin(\omega t)) \)</p>
+                    <p style="text-align: start"><b>4. Solución general:</b></p>
+                    <p style="text-align: center">\( p(t) = (-aE - bS + c)t + C \)</p>
+            </div>
+        </section>
+
+        <section>
+                <h2>Simulación interactiva</h2>
+            <div class="card">
+                <p id="estado"></p>
+                <canvas id="grafica" width="600" height="400"></canvas>
+
+                <div class="controls">
+                    <div class="control-item">
+                        <label>Numero de Empleos: <span id="valE">1</span></label>
+                        <input type="range" id="sliderE" min="0" max="100" step="1" value="1">
+                    </div>
+
+                    <div class="control-item">
+                        <label>Nivel de seguridad: <span id="valS">50</span></label>
+                        <input type="range" id="sliderS" min="0" max="100" step="1" value="50">
+                    </div>
+
+                    <div class="control-item">
+                        <label>Factores negativos: <span id="valC">70</span></label>
+                        <input type="range" id="sliderC" min="0" max="100" step="1" value="70">
+                    </div>
+
+                    <div class="control-item">
+                        <label>Impacto Laboral: <span id="valA">0.5</span></label>
+                        <input type="range" id="sliderA" min="0" max="1" step="0.1" value="0.5">
+                    </div>
+
+                    <div class="control-item">
+                        <label>Impacto Social: <span id="valB">0.3</span></label>
+                        <input type="range" id="sliderB" min="0" max="1" step="0.1" value="0.3">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="card">
+                <h3>Al generar empleo:</h3>
+            <ul>
+                <li>Se recibe apoyo a empresas</li>
+                <li>Se consiguen incentivos económicos</li>
+                <li>Las condiciones laborales se vuelven estables</li>
+            </ul>
         </div>
-    </section>
 
-<section>
-<h2>📈 Gráfica</h2>
-<div class="card">
-<canvas id="grafica" width="600" height="400"></canvas>
+        <div class="card">
+                <h3>Al mejorar la seguridad</h3>
+            <ul>
+                <li>Fortalecer instituciones</li>
+                <li>Reduce exponencialmente la corrupción</li>
+                <li>Hay una mayor vigilancia</li>
+            </ul>
+        </div>
 
-<div class="controls">
-<div class="control-item">
-<label>C1</label>
-<input type="range" id="c1" min="-5" max="5" step="0.1" value="1">
-<span class="value" id="c1Val">1</span>
-</div>
+        <section>
+                <h2>Conclusión</h2>
+            <div class="card">
+                <p>
+                La pobreza que presenta nuestro pais es un factor muy critico que se debe tomar en cuenta y tomar
+                acciones que provean un apoyo y mejora a futuro para el pueblo, mas tambien tomando en cuenta la 
+                falta de seguridad dada a varios factores criticos dentro de nuestro pueblo, la grafica propone 
+                una idea de como este conflicto puede ser resuelto en base a una mejor administraccion y solucion
+                para todo este caos.    
+                </p>
+            </div>
+        </section>
 
-<div class="control-item">
-<label>C2</label>
-<input type="range" id="c2" min="-5" max="5" step="0.1" value="0">
-<span class="value" id="c2Val">0</span>
-</div>
+        <script src="model.js"></script>
 
-<div class="control-item">
-<label>a</label>
-<input type="range" id="a" min="0" max="2" step="0.1" value="0.5">
-<span class="value" id="aVal">0.5</span>
-</div>
-
-<div class="control-item">
-<label>b</label>
-<input type="range" id="b" min="1" max="10" step="0.1" value="4">
-<span class="value" id="bVal">4</span>
-</div>
-</div>
-</div>
-</section>
-
-<script src="model.js"></script>
-
-<p>
-                LO SIENTO PROFE NO ME FIJE QUE DECIA QUE TENIA QUE SER UN FENOMENO SOCIAL Y MODELO ECONOMICO X,D
-            </p>
-</body>
+    </body>
 </html>

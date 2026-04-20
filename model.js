@@ -1,56 +1,121 @@
+// valores iniciales
+    let a = 0.5, b = 0.3, E = 1, S = 50, c = 70, C = 38.5;
 
-const ctx = document.getElementById('grafica').getContext('2d');
-let chart;
+// logica (clave)
+    function P(t){
+        let S_pr = S / 100;
+        let c_pr = c / 100;
 
-
-function updatevalue() {
-    document.getElementById('c1Val').textContent = document.getElementById('c1').value;
-    document.getElementById('c2Val').textContent = document.getElementById('c2').value;
-    document.getElementById('aVal').textContent = document.getElementById('a').value;
-    document.getElementById('bVal').textContent = document.getElementById('b').value;
-}
-
-function mathdata() {
-    const c1 = parseFloat(document.getElementById('c1').value);
-    const c2 = parseFloat(document.getElementById('c2').value);
-    const a = parseFloat(document.getElementById('a').value);
-    const b = parseFloat(document.getElementById('b').value);
-
-    const w = Math.sqrt(Math.max(b - (a*a)/4, 0.01));
-
-    let datos = [];
-    let labels = [];
-
-    for (let t = 0; t <= 10; t += 0.1) {
-        let y = Math.exp(-a/2 * t) * (c1 * Math.cos(w*t) + c2 * Math.sin(w*t));
-        datos.push(y);
-        labels.push(t.toFixed(1));
+        return (-a*E - b*S_pr + c_pr)*t + C;
     }
 
-    return {datos, labels};
-}
+// Logica (subclave)
+    function math2() {
+        let S_pr = S / 100;
+        let c_pr = c / 100;
 
-function updategraphic() {
-     updatevalue();
-    const {datos, labels} = mathdata();
+        return (-a*E - b*S_pr + c_pr);
+    }
 
-    if (chart) chart.destroy();
+//Diseño color critico
+    function setcolor() {
+        let pendiente = math2();
 
-    chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'y(t)',
-                data: datos,
-                borderWidth:2
-            }]
+        if (pendiente < 0) return "green";
+        if (pendiente > 0) return "red";
+        return "yellow";
+    }
+
+//Genera los datos de la grafica
+    function Genedata() {
+        let Star_age = 2025;
+        let age = [];
+        // let tiempos = [];
+        let pobreza = [];
+
+        for (let t = 0; t <= 20; t++) {
+            age.push(Star_age + t);
+            pobreza.push(P(t));
         }
+
+        return { age, pobreza };
+    }
+
+//Grafica
+    const ctx = document.getElementById('grafica').getContext('2d');
+        let datos = Genedata();
+
+        let chart = new Chart(ctx, {
+            type: 'line',
+            data:{
+                labels: datos.age,
+                    datasets: [{
+                        label: 'N° Pobreza | Año',
+                        data: datos.pobreza,
+                        borderWidth: 2,
+                        tension: 0.3,
+                        borderColor: setcolor()
+                    }]
+                },
+            options: { responsive: true }
+        });
+
+//Actualiza el cambio de color
+    function act_state() {
+        let pendiente = math2();
+        let texto = "";
+
+        if (pendiente < 0) texto = "Mejora (Pobreza)";
+            else if (pendiente > 0) texto = "Empeora (Pobreza)";
+                else texto = "Estable (=)";
+
+        document.getElementById("estado").textContent = texto;
+    }
+
+//Actualiza el estado de la grafica
+    function Act_Grafic_state() {
+        let newDats = Genedata();
+        let color = setcolor();
+
+        chart.data.labels = newDats.age;
+        chart.data.datasets[0].data = newDats.pobreza;
+        chart.data.datasets[0].borderColor = color;
+
+        chart.update();
+        act_state();
+    }
+
+//Sliders
+    function conectarSlider(id, callback) {
+        document.getElementById(id).addEventListener('input', callback);
+    }
+
+    conectarSlider("sliderA", (e) => {
+        a = parseFloat(e.target.value);
+        document.getElementById("valA").textContent = a;
+        Act_Grafic_state();
     });
-}
 
-document.querySelectorAll('input').forEach(input => {
-    input.addEventListener('input', updategraphic);
-});
+    conectarSlider("sliderB", (e) => {
+        b = parseFloat(e.target.value);
+        document.getElementById("valB").textContent = b;
+        Act_Grafic_state();
+    });
 
-updategraphic();
+    conectarSlider("sliderE", (e) => {
+        E = parseFloat(e.target.value);
+        document.getElementById("valE").textContent = E;
+        Act_Grafic_state();
+    });
+
+    conectarSlider("sliderS", (e) => {
+        S = parseFloat(e.target.value);
+        document.getElementById("valS").textContent = S;
+        Act_Grafic_state();
+    });
+
+    conectarSlider("sliderC", (e) => {
+        c = parseFloat(e.target.value);
+        document.getElementById("valC").textContent = c;
+        Act_Grafic_state();
+    });
