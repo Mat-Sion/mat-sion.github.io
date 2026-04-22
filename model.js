@@ -4,6 +4,9 @@
 // Valores Modificados
     function setExplain(text) {
         document.getElementById("explain").textContent = text;
+
+        box.classList.remove("in");
+        box.classList.add("out");
     }
 
     function SetI() {

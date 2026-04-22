@@ -33,6 +33,19 @@
             background: #0ea5e9;
         }
 
+        .in {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease;
+            pointer-events: none;
+        }
+
+        .out {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
         h1, h2, h4{
             color: #38bdf8;
             text-align: center;
