@@ -1,20 +1,83 @@
 // valores iniciales
     let a = 0.5, b = 0.3, E = 1, S = 50, c = 70, C = 38.5;
 
+// Valores Modificados
+    function setExplain(text) {
+        document.getElementById("explain").textContent = text;
+    }
+
+    function SetI() {
+        a = 0.5, b = 0.7, E = 2, S = 45, c = 35, C = 44.5;
+
+        updateSliders();
+        Act_Grafic_state();
+
+        setExplain(
+            "La carencia de acceso a los servicios de salud ah llevado a que muchos ciudadanos no cuenten con los servicios adecuados para" +
+            "la salud, llevando a que mas de 44.5 millones de personas sean afectadas y no cuenten con los tratamientos debidos, pues no mas" +
+            "de 37% de los ciudadanos ejercen esta carrera por el temor o la gran responsabilidad que presenta disminuyendo su seguridad" +
+            "y el acceso que puede tener la gente a su salud."
+        );
+    }
+
+    function SetII() {
+        a = 0.2, b = 0.8, E = 63, S = 20, c = 32, C = 40.3;
+
+        updateSliders();
+        Act_Grafic_state();
+
+        setExplain(
+            "La carencia social es uno de los factores mas comunes en la poblacion que bien, no se 'consideran' pobres como tal la carencia" +
+            "de recursos, tales como La educacion, La salud, Los servicios basicos como (Luz, agua potable, gas) y en algunos casos, de" +
+            "viviendas propias, llevando a que mucha gente tome multiples trabajos para sobrevivir el dia a dia, esto representando el 32%" +
+            "de la poblacion total (segun la 4t), teniendo un gran impacto en la seguridad y en el crecimiento economico."
+        );
+    }
+
+    function SetIII() {
+        a = 0.1, b = 0.3, E = 10, S = 40, c = 13, C = 7;
+
+        updateSliders();
+        Act_Grafic_state();
+
+        setExplain(
+            "La pobreza extrema es uno de las situaciones mas lamentables para la poblacion pero que por fortuna no ah ido en crecimiento," +
+            "desde 2024 esa cifra se ah mantenido estable, representando el 0.11% de la poblacion, en su mayor caso muchos no reciben ingresos" +
+            "de forma directa, ya sea por incapacidades oh conflitos sociales, familiares o por abandono, por lo que muchos, dia a dia tratan" +
+            "de obtener sustento por pequeños apoyos sociales, asi como ofreciendo servicios que estan bajo a su disposicion."
+        );
+    }
+
+    function SetIV() {
+        a = 0.2, b = 0.8, E = 10, S = 46, c = 30, C = 40.3;
+
+        updateSliders();
+        Act_Grafic_state();
+
+        setExplain(
+            "La escazes salarial es un tema que ah ido mejorando poco a poco en los ultimos dias, pues desde el 2025 esta taza ah caido al 32%" +
+            "de las personas que no pueden comprar la canasta basica con su salario, debido a un pequeño aumento en el salario minimo y el" +
+            "crecimiento de empleos para que la gente tenga de donde generar para dar sustento a sus hogares y a la vez obtener los servicios" +
+            "requeridos para poder vivir su dia a dia."
+        );
+    }
+
 // logica (clave)
     function P(t){
+        let E_pr = E / 100;
         let S_pr = S / 100;
         let c_pr = c / 100;
 
-        return (-a*E - b*S_pr + c_pr)*t + C;
+        return (-a*E_pr - b*S_pr + c_pr)*t + C;
     }
 
 // Logica (subclave)
     function math2() {
+        let E_pr = E / 100;
         let S_pr = S / 100;
         let c_pr = c / 100;
 
-        return (-a*E - b*S_pr + c_pr);
+        return (-a*E_pr - b*S_pr + c_pr);
     }
 
 //Diseño color critico
@@ -85,36 +148,54 @@
         act_state();
     }
 
+//Actualizar sliders
+    function updateSliders() {
+        document.getElementById("sliderA").value = a;
+        document.getElementById("valA").textContent = a;
+
+        document.getElementById("sliderB").value = b;
+        document.getElementById("valB").textContent = b;
+
+        document.getElementById("sliderE").value = E;
+        document.getElementById("valE").textContent = E;
+
+        document.getElementById("sliderS").value = S;
+        document.getElementById("valS").textContent = S;
+
+        document.getElementById("sliderC").value = c;
+        document.getElementById("valC").textContent = c;
+    }
+
 //Sliders
-    function conectarSlider(id, callback) {
+    function conectSlider(id, callback) {
         document.getElementById(id).addEventListener('input', callback);
     }
 
-    conectarSlider("sliderA", (e) => {
+    conectSlider("sliderA", (e) => {
         a = parseFloat(e.target.value);
         document.getElementById("valA").textContent = a;
         Act_Grafic_state();
     });
 
-    conectarSlider("sliderB", (e) => {
+    conectSlider("sliderB", (e) => {
         b = parseFloat(e.target.value);
         document.getElementById("valB").textContent = b;
         Act_Grafic_state();
     });
 
-    conectarSlider("sliderE", (e) => {
+    conectSlider("sliderE", (e) => {
         E = parseFloat(e.target.value);
         document.getElementById("valE").textContent = E;
         Act_Grafic_state();
     });
 
-    conectarSlider("sliderS", (e) => {
+    conectSlider("sliderS", (e) => {
         S = parseFloat(e.target.value);
         document.getElementById("valS").textContent = S;
         Act_Grafic_state();
     });
 
-    conectarSlider("sliderC", (e) => {
+    conectSlider("sliderC", (e) => {
         c = parseFloat(e.target.value);
         document.getElementById("valC").textContent = c;
         Act_Grafic_state();

@@ -92,12 +92,12 @@
 
                 <div class="controls">
                     <div class="control-item">
-                        <label>Numero de Empleos: <span id="valE">1</span></label>
+                        <label>Empleos: <span id="valE">1</span></label>
                         <input type="range" id="sliderE" min="0" max="100" step="1" value="1">
                     </div>
 
                     <div class="control-item">
-                        <label>Nivel de seguridad: <span id="valS">50</span></label>
+                        <label>Seguridad: <span id="valS">50</span></label>
                         <input type="range" id="sliderS" min="0" max="100" step="1" value="50">
                     </div>
 
@@ -118,6 +118,19 @@
                 </div>
             </div>
         </section>
+
+            <div style="text-align: center">
+                <h3 style="text-align: center">Simulaciones</h3>
+
+                    <button onclick="SetI()">🔴 Peligro</button>
+                    <button onclick="SetII()">🟠 En Riesgo</button>
+                    <button onclick="SetIII()">🟡 Neutral</button>
+                    <button onclick="SetIV()">🟢 Mejora</button>
+            </div>
+
+            <div class="card">
+                    <p id="explain"></p>
+            </div>
 
         <div class="card">
                 <h3>Al generar empleo:</h3>
